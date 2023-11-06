@@ -76,7 +76,11 @@ Your Python script will now run continuously in the background as a systemd serv
 systemctl status nginx_log_listener.service
 ```
 
-
+template1=# SELECT http_apikey, COUNT(*) FROM nginx_logs GROUP BY http_apikey;
+       http_apikey        | count
+--------------------------+-------
+ KxN+XQmvdb6Xnth7UaAtlczY |    29
+(1 row)
 
 template1=# SELECT http_apikey, DATE(time_local) AS day, COUNT(*) FROM nginx_logs GROUP BY http_apikey, day;
        http_apikey        |    day     | count
