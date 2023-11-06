@@ -75,3 +75,19 @@ Your Python script will now run continuously in the background as a systemd serv
 ```bash
 systemctl status nginx_log_listener.service
 ```
+
+
+
+template1=# SELECT http_apikey, DATE(time_local) AS day, COUNT(*) FROM nginx_logs GROUP BY http_apikey, day;
+       http_apikey        |    day     | count
+--------------------------+------------+-------
+ KxN+XQmvdb6Xnth7UaAtlczY | 2023-11-06 |    29
+(1 row)
+
+template1=# SELECT http_apikey, DATE_TRUNC('hour', time_local) AS dayhr, COUNT(*) FROM nginx_logs GROUP BY http_apikey, dayhr;
+       http_apikey        |        dayhr        | count
+--------------------------+---------------------+-------
+ KxN+XQmvdb6Xnth7UaAtlczY | 2023-11-06 11:00:00 |    17
+ KxN+XQmvdb6Xnth7UaAtlczY | 2023-11-06 10:00:00 |     3
+ KxN+XQmvdb6Xnth7UaAtlczY | 2023-11-06 13:00:00 |     9
+(3 rows)
