@@ -52,3 +52,26 @@ WantedBy=multi-user.target
 ExecStart: Set this to the full path to your Python script.
 WorkingDirectory: Set this to the directory containing your script.
 User and Group: If running as a specific user is necessary, specify the user and group here.
+
+4. Save the file and exit the text editor.
+5. Reload systemd to apply the new service:
+For a system-wide service:
+```bash
+sudo systemctl daemon-reload
+```
+6. Enable the service to start on boot:
+For a system-wide service:
+```bash
+sudo systemctl enable nginx_log_listener.service
+```
+7. Start the service:
+For a system-wide service:
+```bash
+sudo systemctl start nginx_log_listener.service
+```
+
+Your Python script will now run continuously in the background as a systemd service. You can check its status with:
+
+```bash
+systemctl status nginx_log_listener.service
+```
