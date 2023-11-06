@@ -10,6 +10,27 @@ For a system-wide service (requires root access):
 sudo nano /etc/systemd/system/nginx_log_listener.service
 
 3. Add the following content to the .service file, replacing <PATH_TO_SCRIPT> with the full path to your Python script:
+
+```bash
+[Unit]
+Description=Continuous Nginx Log Listener
+
+[Service]
+ExecStart=/usr/bin/python3 <PATH_TO_SCRIPT>
+WorkingDirectory=<DIRECTORY_OF_SCRIPT>
+Restart=always
+User=<YOUR_USERNAME>
+Group=<YOUR_GROUP>
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=nginx_log_listener
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Example:
+
 ```bash
 [Unit]
 Description=Continuous Nginx Log Listener
@@ -27,3 +48,7 @@ SyslogIdentifier=nginx_log_listener
 [Install]
 WantedBy=multi-user.target
 ```
+
+ExecStart: Set this to the full path to your Python script.
+WorkingDirectory: Set this to the directory containing your script.
+User and Group: If running as a specific user is necessary, specify the user and group here.
