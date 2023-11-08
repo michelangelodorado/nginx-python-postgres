@@ -1,4 +1,4 @@
-# nginxlog-postgres
+# nginxlogs-postgres
 
 
 
